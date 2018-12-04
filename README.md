@@ -1,4 +1,4 @@
-# e-wallet
+# E-wallet
 
 ## Building the application
 
