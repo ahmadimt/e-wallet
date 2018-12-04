@@ -22,6 +22,6 @@ The APIs can be tested using Swagger which is available at `http://localhost:808
 
 ## Future Improvements and Known issues
 
-1. The dropdown is the UI is not rendering sometimes on first load. At this time, refreshing page is the solution.
+1. The dropdown in the UI is not rendering sometimes on first load. At this time, refreshing page is the solution.
 2. The Passbook details are not paginated. We can make it paginated.
 3. For now, I have not consider the security (specifically the access control system). We need to implement it.
