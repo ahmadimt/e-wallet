@@ -1,0 +1,106 @@
+<h5>Details</h5>
+<div class="row custom-border">
+    <div *ngIf="walletDetails">
+        <table class="centered responsive-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Current Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{walletDetails.name}}</td>
+                    <td>{{walletDetails.type}}</td>
+                    <td>{{walletDetails.balance}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<h5>Transaction</h5>
+<div class="row">
+    <!-- <div>
+        <ul class="tabs">
+            <li class="tab col s6"><a href="#transaction" class="active" (click)="hidePassbook()">Transaction</a></li>
+            <li class="tab col s6"><a href="#passbook" (click)="getPassbook()">Passbook</a></li>
+        </ul>
+    </div> -->
+    <div id="transaction" class="col s12 top-padding-10px custom-border">
+
+        <div class="row">
+            <span>Start a new Transaction</span>
+            <form [formGroup]="transactionForm">
+                <div>
+                    <div class="input-field col s6">
+                        <!-- <label for="icon_prefix">Please enter a valid amount</label> -->
+                        <input id="icon_prefix" type="number" placeholder="e.g. 32.23" class="validate" formControlName="amount" required step="0.01">
+                        <div *ngIf="transactionForm.controls['amount'].hasError('required')" class="error-msg">
+                            Amount is required.
+                        </div>
+                        <div *ngIf="transactionForm.controls['amount'].hasError('pattern')" class="error-msg">
+                            Only two decimal places are allowed
+                        </div>
+                    </div>
+                    <div class="input-field col s6">
+                        <select [ngModel]="selectedValue" [ngModelOptions]="{standalone: true}" (ngModelChange)="select.value = onTypeChanged($event)">
+                        <option value="" disabled selected>Choose a type of transaction</option>
+                        <option value="CREDIT">CREDIT</option>
+                        <option value="DEBIT">DEBIT</option>
+                    </select>
+                        <label>Type of transaction</label>
+                    </div>
+                </div>
+                <div class="col s12 no-padding ">
+                    <div class="col s6 right">
+                        <button type="submit" (click)="doTransaction()" [disabled]="transactionForm.invalid || !selectedValue" class="btn save-button right">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row">
+            <span>Cancel Transaction</span>
+            <form [formGroup]="cancellationForm">
+                <div>
+                    <div class="input-field col s6">
+                        <!-- <label for="icon_prefix">Please enter a valid amount</label> -->
+                        <input id="icon_prefix" type="text" placeholder="171f5951-3b53-47f6-a482-7a18dc23acdb" class="validate" formControlName="transactionId" required>
+                        <div *ngIf="cancellationForm.controls['transactionId'].hasError('required')" class="error-msg">
+                            Transaction Id is required.
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="col s12">
+                <div class="col s6">
+                    <button type="submit" (click)="cancelTransaction()" [disabled]="cancellationForm.invalid" class="btn save-button right">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <h5>Passbook</h5>
+    <div id="Passbook" class="col s12 custom-border">
+        <table class="centered responsive-table" *ngIf="transactionDetails">
+            <thead>
+                <tr>
+                    <th>Transaction Id</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tr *ngFor="let detail of transactionDetails.transactions">
+                <td>{{detail.transactionId}}</td>
+                <td>{{detail.amount}}</td>
+                <td>{{detail.type}}</td>
+                <td>{{detail.status}}</td>
+                <td>{{detail.timestamp}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

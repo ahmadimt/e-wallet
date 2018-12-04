@@ -1,0 +1,67 @@
+<div class="row" style="margin-top: 20px">
+
+</div>
+<div>
+    <ul class="collapsible">
+        <li>
+            <div class="collapsible-header">View Wallets</div>
+            <div class="collapsible-body">
+                <form class="col s12" [formGroup]="walletForm">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="icon_prefix_1" type="text" class="validate" formControlName="walletId" required>
+                            <label for="icon_prefix_1">Please enter a valid wallet id</label>
+                            <div *ngIf="walletForm.controls['walletId'].hasError('required')" class="error-msg">
+                                Wallet id is required.
+                            </div>
+                            <div *ngIf="walletForm.controls['walletId'].hasError('pattern')" class="error-msg">
+                                Wallet id is invalid.
+                            </div>
+                        </div>
+                        <div class="input-field col s6">
+                            <div class="input-field col s4">
+                                <button type="submit" (click)="show()" [disabled]="walletForm.invalid" class="btn btn-success save-button">Get Wallet</button>
+                            </div>
+                            <div class="input-field col s4">
+                                <button type="submit" (click)="showResults()" [disabled]="walletForm.invalid" class="btn btn-success save-button">Show All</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li>
+        <li>
+            <div class="collapsible-header">Create Wallets</div>
+            <div class="collapsible-body">
+                <form class="col s12 custom-form" [formGroup]="walletAdminForm">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            <input id="icon_prefix" type="text" class="validate" formControlName="name" required>
+                            <label for="icon_prefix">Name of the wallet</label>
+                            <div *ngIf="walletAdminForm.controls['name'].hasError('required')" class="error-msg">
+                                Name is required.
+                            </div>
+                            <div *ngIf="walletAdminForm.controls['name'].hasError('pattern')" class="error-msg">
+                                Name is invalid.
+                            </div>
+                        </div>
+
+                        <div class="input-field col s6">
+                            <select [ngModel]="selectedValue" [ngModelOptions]="{standalone: true}" (ngModelChange)="select.value = onTypeChanged($event)" >
+                                <option value="" disabled selected>Choose a type of Wallet</option>
+                                <option value="Regular">Regular</option>
+                                <option value="Overdraft">Overdraft</option>
+                            </select>
+                            <label>Type of Wallet</label>
+                        </div>
+                    </div>
+                    <div class="input-field col 12">
+                        <div class="input-field col 6 custom-float">
+                            <button type="submit" (click)="create($event)" class="btn btn-success save-button">Create Wallet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>

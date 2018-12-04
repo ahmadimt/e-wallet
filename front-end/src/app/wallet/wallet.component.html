@@ -1,0 +1,17 @@
+<div class="row" *ngIf="wallets">
+    <table class="centered responsive-table no-padding">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Balance</th>
+            </tr>
+        </thead>
+        <tr *ngFor="let wallet of wallets.wallets">
+            <td><a [routerLink]="wallet.id">{{wallet.id}}</a></td>
+            <td>{{wallet.type}}</td>
+            <td>{{wallet.balance}}</td>
+        </tr>
+    </table>
+
+</div>
